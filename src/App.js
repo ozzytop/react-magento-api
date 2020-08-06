@@ -1,24 +1,41 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import './Components/GetToken'
+import { Container } from 'react-bootstrap';
+import GetToken from './Components/GetToken';
+import GetCurrency from './Components/GetCurrency';
+import CreateProduct from './Components/CreateProduct';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {
+    Collapse,
+    Navbar,
+    NavbarToggler,
+    NavbarBrand,
+    Nav,
+    NavItem,
+    NavLink,
+    UncontrolledDropdown,
+    DropdownToggle,
+    DropdownMenu,
+    DropdownItem,
+    NavbarText
+  } from 'reactstrap';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+        <Navbar color="light" light expand="md">
+            <NavbarBrand href="/">Mg Api</NavbarBrand>
+        </Navbar>
+        <br></br>
+        <Container>
+            <GetToken></GetToken>
+            <br></br>
+            <CreateProduct></CreateProduct>
+            <br></br>
+            <GetCurrency></GetCurrency>
+        </Container>
     </div>
   );
 }
