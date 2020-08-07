@@ -26,7 +26,8 @@ class GetToken extends Component {
             message: true,
             allowed: false,
             showSuccess: false,
-            spinner:false
+            spinner:false,
+            message: ''
         }
         this.handleUsername = this.handleUsername.bind(this);
         this.handlePassword = this.handlePassword.bind(this);
@@ -46,7 +47,7 @@ class GetToken extends Component {
         var data = new FormData();
         data.append("username", this.state.username);
         data.append("password", this.state.password);
-
+        
         const url = `${this.state.url}/rest/V1/integration/admin/token`;
         axios.post(url, data, axiosConfig)
         .then((response) => {
@@ -55,20 +56,22 @@ class GetToken extends Component {
             this.setState({
                 allowed: true,
                 showSuccess: true,
+                error: false,
                 token: response.data,
                 spinner: false
             });
             localStorage.setItem('mg-admin-token', response.data);
         })
         .catch((err) => {
-            console.log(err);
-        });
-        /*
-        .then(function () {
             this.setState({
-                spinner: false
-            })
-        });*/  
+                spinner: false,
+                error: true,
+                message: err.message
+            });
+            setTimeout(function(){
+                this.setState({error:false});
+            }.bind(this), 5000); 
+        });
 
     }
 
@@ -105,7 +108,7 @@ class GetToken extends Component {
                             <Col xs={12}>
                                 This is the url that you are using for doing the requests: <strong>{this.state.url}</strong>
                             </Col>
-                        </Row>  
+                        </Row>
                         <br></br>
                         <Form>
                             <FormGroup>
@@ -123,6 +126,9 @@ class GetToken extends Component {
                             <Spinner style={{ width: '2rem', height: '2rem' , display: this.state.spinner ? "block" : "none"}} />{' '}
                             <Alert style={{ display: this.state.showSuccess ? "block" : "none" }} color="success">
                                 You had a success request, the token is: {this.state.token}
+                            </Alert>
+                            <Alert style={{ display: this.state.error ? "block" : "none" }} color="danger">
+                                Error: {this.state.message}
                             </Alert>
                         </Form>
                     </Col>

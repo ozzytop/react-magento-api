@@ -6,20 +6,11 @@ import { Container } from 'react-bootstrap';
 import GetToken from './Components/GetToken';
 import GetCurrency from './Components/GetCurrency';
 import CreateProduct from './Components/CreateProduct';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
-    Collapse,
     Navbar,
-    NavbarToggler,
     NavbarBrand,
-    Nav,
-    NavItem,
-    NavLink,
-    UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem,
-    NavbarText
   } from 'reactstrap';
 
 function App() {
