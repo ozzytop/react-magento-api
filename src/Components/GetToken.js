@@ -51,8 +51,6 @@ class GetToken extends Component {
         const url = `${this.state.url}/rest/V1/integration/admin/token`;
         axios.post(url, data, axiosConfig)
         .then((response) => {
-            console.log(response);
-            debugger;
             this.setState({
                 allowed: true,
                 showSuccess: true,
@@ -120,10 +118,10 @@ class GetToken extends Component {
                                 <Input type="password" name="password" id="password" placeholder="Password" value={this.state.password} onChange={this.handlePassword}/>
                             </FormGroup>
                             
-                            <Button variant="primary" onClick={() => this.getToken()}>
+                            <Button variant="primary" onClick={() => this.getToken()} style={{ marginBottom: '1rem', marginRight: '10px' }}>
                                 Get Token
                             </Button>
-                            <Spinner style={{ width: '2rem', height: '2rem' , display: this.state.spinner ? "block" : "none"}} />{' '}
+                            <Spinner style={{ width: '2rem', height: '2rem' , display: this.state.spinner ? "inline-block" : "none"}} />
                             <Alert style={{ display: this.state.showSuccess ? "block" : "none" }} color="success">
                                 You had a success request, the token is: {this.state.token}
                             </Alert>

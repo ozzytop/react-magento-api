@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { FaChevronDown } from "react-icons/fa";
 import {
     Container,
     Row,
@@ -56,7 +57,7 @@ class GetCurrency extends Component {
     render() {
       return (  
         <div>
-            <Button color="primary" onClick={() => this.toggle()} style={{ marginBottom: '1rem' }}>Get Currency Information</Button>
+            <Button color="primary" onClick={() => this.toggle()} style={{ marginBottom: '1rem' }}> <FaChevronDown /> Get Currency Information</Button>
             <Collapse
                 isOpen={this.state.open}>
                 <Card>
