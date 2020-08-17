@@ -19,9 +19,9 @@ class GetToken extends Component {
     constructor(props){
         super(props);
         this.state = {
-            url: 'http://local.chemcentral.com',
             username: '',
             password: '',
+            url: '',
             token:'',
             message: true,
             allowed: false,
@@ -29,6 +29,7 @@ class GetToken extends Component {
             spinner:false,
             message: ''
         }
+        this.handleUrl = this.handleUrl.bind(this);
         this.handleUsername = this.handleUsername.bind(this);
         this.handlePassword = this.handlePassword.bind(this);
     }
@@ -77,6 +78,12 @@ class GetToken extends Component {
         console.log('create Prduct');
     }
 
+    handleUrl(event) {
+        this.setState({
+            url: event.target.value
+        });
+    }
+
     handleUsername(event) {
         this.setState({
             username: event.target.value
@@ -98,11 +105,15 @@ class GetToken extends Component {
                     <Col xs={8}>
                         <Row>
                             <Col xs={12}>
-                                You have to get the token of your application for certain request.
+                                Before starting, insert the url of your Magento store, include the The Hypertext Transfer Protoco like this example: http://magento-store.com
                             </Col>
                         </Row>
                         <br></br>
                         <Row>
+                            <FormGroup>
+                                <Label for="url">Url</Label>
+                                <Input type="text" name="url" id="url" placeholder="Url" value={this.state.url} onChange={this.handleUrl} />
+                            </FormGroup>
                             <Col xs={12}>
                                 This is the url that you are using for doing the requests: <strong>{this.state.url}</strong>
                             </Col>

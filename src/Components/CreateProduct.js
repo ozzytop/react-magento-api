@@ -62,7 +62,8 @@ class CreateProduct extends Component {
         let axiosConfig = {
             headers: {
                 'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json',
+                'Content-Type': 'text/plain',
+                'Access-Control-Allow-Origin': '*'
             }
         };
 
