@@ -24,13 +24,7 @@ class CreateProduct extends Component {
         super(props);
         this.state = {
             url: 'http://local.chemcentral.com',
-            sku: '',
-            name: '',
-            price:'',
-            status:'',
-            weight:'',
-            visibility: '',
-            productType: '',
+            id: 0,
             message: true,
             allowed: false,
             showSuccess: false,
@@ -62,27 +56,37 @@ class CreateProduct extends Component {
         let axiosConfig = {
             headers: {
                 'Authorization': `Bearer ${token}`,
-                'Content-Type': 'text/plain',
-                'Access-Control-Allow-Origin': '*'
+                'Content-Type': 'application/json'
             }
         };
+        
+        debugger;
+        var data = JSON.stringify({
+            'product': {
+                'sku': this.state.fields['sku'], 
+                'name': this.state.fields['name'],
+                'weight': parseInt(this.state.fields['weight']),
+                'price': parseInt(this.state.fields['price']),
+                'status': this.state.fields['status'],
+                'visibility': this.state.fields['visibility'],
+                'type_id': this.state.fields['productType'],
+                'attribute_set_id': 4,
+            }
+        });
 
-        var data = new FormData();
-        data.append("sku", this.state.fields['sku']);
-        data.append("name", this.state.fields['name']);
-        data.append("price", this.state.fields['price']);
-        data.append("status", this.state.fields['status']);
-        data.append("weight", this.state.fields['weight']);
-        data.append("visibility", this.state.fields['visibility']);
-        data.append("productType", this.state.fields['productType']);
+        console.log(data);
+
         
         const url = `${this.state.url}/rest/default/V1/products`;
         axios.post(url, data, axiosConfig)
         .then((response) => {
-            debugger;
+            
             console.log(response);
             this.setState({
-                spinner: false
+                spinner: false,
+                showSuccess:true,
+                id:response.data.id
+                
             });
 
         })
@@ -201,7 +205,18 @@ class CreateProduct extends Component {
                                         </Button>
                                         <Spinner style={{ width: '2rem', height: '2rem' , display: this.state.spinner ? "inline-block" : "none"}} />
                                         <Alert style={{ display: this.state.showSuccess ? "block" : "none" }} color="success">
-                                            You had a success request, the token is: {this.state.token}
+                                            <h4 className="alert-heading">Yaaas!</h4>
+                                            <p>
+                                                You have been created the new product correctly.
+                                            </p>
+                                            <hr />
+                                            <p>
+                                                Id of the product: {this.state.id}    
+                                            </p>
+                                            <p>
+                                                Name of the product: {this.state.fields['name']}    
+                                            </p>
+                                            
                                         </Alert>
                                     </Form>
                                 </Col>

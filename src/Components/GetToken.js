@@ -21,7 +21,7 @@ class GetToken extends Component {
         this.state = {
             username: '',
             password: '',
-            url: '',
+            url: 'http://local.chemcentral.com',
             token:'',
             message: true,
             allowed: false,
